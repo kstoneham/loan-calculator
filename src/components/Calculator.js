@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Calculator() {
-  const [principal, setPrincipal] = useState(10000);
-  const [collateralBTC, setCollateralBTC] = useState(5);
+  const [principal, setPrincipal] = useState(150000);
+  const [collateralBTC, setCollateralBTC] = useState(3);
   const [btcPrice, setBtcPrice] = useState(0);
   const [paymentInput, setPaymentInput] = useState('');
   const [depositInput, setDepositInput] = useState('');
   const [sellInput, setSellInput] = useState('');
+  const [userPriceInput, setUserPriceInput] = useState(''); // New state for user price input
 
   useEffect(() => {
     const fetchBtcPrice = async () => {
@@ -24,11 +25,12 @@ function Calculator() {
     const intervalId = setInterval(fetchBtcPrice, 60000); // Update every minute
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
-  }, []);
+  },);
 
   const calculateRatio = () => {
     if (principal === 0) return 0;
-    return ((collateralBTC * btcPrice) / principal) * 100;
+    const price = userPriceInput ? parseFloat(userPriceInput) : btcPrice; // Use user input if available
+    return ((collateralBTC * price) / principal) * 100;
   };
 
   const makePrincipalPayment = () => {
@@ -51,8 +53,9 @@ function Calculator() {
     const sellAmount = parseFloat(sellInput);
     if (!isNaN(sellAmount) && sellAmount > 0 && sellAmount <= collateralBTC) {
       setCollateralBTC((prevCollateral) => prevCollateral - sellAmount);
+      const price = userPriceInput ? parseFloat(userPriceInput) : btcPrice; // Use user input if available
       setPrincipal((prevPrincipal) =>
-        Math.max(0, prevPrincipal - sellAmount * btcPrice)
+        Math.max(0, prevPrincipal - sellAmount * price)
       );
       setSellInput('');
     } else if (sellAmount > collateralBTC) {
@@ -60,9 +63,32 @@ function Calculator() {
     }
   };
 
+  const resetCalculator = () => {
+    setPrincipal(150000);
+    setCollateralBTC(3);
+    setBtcPrice(0);
+    setPaymentInput('');
+    setDepositInput('');
+    setSellInput('');
+    setUserPriceInput(''); // Reset user price input
+
+    // Fetch the latest BTC price from the API
+    const fetchBtcPrice = async () => {
+      try {
+        const response = await axios.get('https://www.bitstamp.net/api/v2/ticker/btcusd/');
+        setBtcPrice(parseFloat(response.data.last));
+      } catch (error) {
+        console.error('Error fetching BTC price:', error);
+      }
+    };
+    fetchBtcPrice();
+  };
+
   return (
     <div>
       <h2>Loan Calculator</h2>
+
+      {/* Rest of the form */}
       <div>
         <label>Principal (USD):</label>
         <input
@@ -80,8 +106,8 @@ function Calculator() {
         />
       </div>
       <div>
-        <p>BTC Price (USD): {btcPrice.toFixed(2)}</p>
-        <p>Collateral Value (USD): {(collateralBTC * btcPrice).toFixed(2)}</p>
+        <p>BTC Price (USD): {userPriceInput ? parseFloat(userPriceInput).toFixed(2) : btcPrice.toFixed(2)}</p>
+        <p>Collateral Value (USD): {(collateralBTC * (userPriceInput ? parseFloat(userPriceInput) : btcPrice)).toFixed(2)}</p>
         <p>Collateral/Principal Ratio: {calculateRatio().toFixed(2)}%</p>
       </div>
 
@@ -114,6 +140,19 @@ function Calculator() {
         />
         <button onClick={sellBTC}>Sell</button>
       </div>
+
+    {/* User Price Input */}
+      <div>
+        <label>Custom BTC Price (USD):</label>
+        <input
+          type="number"
+          value={userPriceInput}
+          onChange={(e) => setUserPriceInput(e.target.value)}
+        />
+      </div>
+
+      {/* Reset Button */}
+      <button onClick={resetCalculator}>Reset Calculator</button>
     </div>
   );
 }
