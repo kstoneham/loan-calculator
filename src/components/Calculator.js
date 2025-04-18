@@ -1,4 +1,3 @@
-// src/components/Calculator.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -88,7 +87,6 @@ function Calculator() {
     <div>
       <h2>Loan Calculator</h2>
 
-      {/* Rest of the form */}
       <div>
         <label>Principal (USD):</label>
         <input
@@ -141,7 +139,6 @@ function Calculator() {
         <button onClick={sellBTC}>Sell</button>
       </div>
 
-    {/* User Price Input */}
       <div>
         <label>Custom BTC Price (USD):</label>
         <input
@@ -151,7 +148,6 @@ function Calculator() {
         />
       </div>
 
-      {/* Reset Button */}
       <button onClick={resetCalculator}>Reset Calculator</button>
     </div>
   );

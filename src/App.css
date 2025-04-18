@@ -1,20 +1,43 @@
-/* src/App.css */
-
 body {
-  font-family: "Inter", sans-serif; /* Use Inter font from Google Fonts */
+  font-family: "Inter", sans-serif; 
+  background-color: rgb(205, 213, 223);
 }
 
-.App {
-  text-align: center;
-  padding: 20px;
-  max-width: 600px; /* Limit container width */
-  margin: 0 auto; /* Center the container */
+.Cards {
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px; 
+  width: 350px; 
+  display: inline-block;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: repeat(2, auto); 
+  gap: 10px; 
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.title {
+  font-family: "Lora";
+  color: rgb(14, 46, 94);
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px; 
+  max-width: 900px;
+  background-color: white;
+  margin: 0 auto;
 }
 
 h2 {
-  color: #007bff; /* Unchained blue color */
+  color: #007bff; 
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  text-align: center;
 }
 
 label {
@@ -27,23 +50,35 @@ input[type="number"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ced4da; /* Light gray border */
+  border: 1px solid #ced4da; 
   border-radius: 4px;
   box-sizing: border-box;
 }
 
+select {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-radius: 0.5rem;
+  border-color: rgb(205 213 223 / var(--tw-border-opacity));
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;  
+}
+
 button {
-  background-color: #007bff; /* Unchained blue color */
+  background-color: #007bff; 
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
+  margin: 0 auto;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
 div {
