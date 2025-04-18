@@ -62,7 +62,7 @@ function App() {
 
   async function fetchBtcPrice() {
     try {
-      const response = await axios.get('/api/v2/ticker/btcusd/');
+      const response = await axios.get('https://www.bitstamp.net/api/v2/ticker/btcusd/');
       setBtcPrice(parseFloat(response.data.last));
     } catch (error) {
       console.error('Error fetching BTC price: ', error);
