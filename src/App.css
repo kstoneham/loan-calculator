@@ -1,13 +1,13 @@
 body {
-  font-family: "Inter", sans-serif; 
+  font-family: "Inter", sans-serif;
   background-color: rgb(205, 213, 223);
 }
 
 .Cards {
-  border: 1px solid #ccc; 
-  border-radius: 8px; 
-  padding: 10px; 
-  width: 350px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 350px;
   display: inline-block;
   background-color: white;
   margin: 0 auto;
@@ -15,9 +15,9 @@ body {
 
 .main-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  grid-template-rows: repeat(2, auto); 
-  gap: 10px; 
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 10px;
   max-width: 900px;
   margin: 0 auto;
   margin-top: 10px;
@@ -26,16 +26,16 @@ body {
 .title {
   font-family: "Lora";
   color: rgb(14, 46, 94);
-  border: 1px solid #ccc; 
-  border-radius: 8px; 
-  padding: 10px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
   max-width: 900px;
   background-color: white;
   margin: 0 auto;
 }
 
 h2 {
-  color: #007bff; 
+  color: #007bff;
   font-size: 2.5rem;
   text-align: center;
 }
@@ -50,7 +50,7 @@ input[type="number"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ced4da; 
+  border: 1px solid #ced4da;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -63,11 +63,11 @@ select {
   display: block;
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
 }
 
 button {
-  background-color: #007bff; 
+  background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -78,7 +78,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
 div {
@@ -87,4 +87,48 @@ div {
 
 p {
   margin-bottom: 10px;
+}
+
+/* Media Queries */
+
+/* For screens smaller than 768px (e.g., tablets and large phones) */
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr; /* Stack cards vertically */
+    max-width: 95%; /* Adjust max-width for smaller screens */
+  }
+
+  .Cards {
+    width: 95%; /* Make cards take up more width */
+    margin: 10px auto; /* Add some vertical margin between stacked cards */
+  }
+
+  .title {
+    max-width: 95%;
+  }
+
+  h2 {
+    font-size: 2rem; /* Reduce heading size */
+  }
+}
+
+/* For screens smaller than 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .Cards {
+    width: 100%; /* Make cards full width */
+    padding: 8px; /* Slightly reduce padding */
+  }
+
+  .main-container, .title {
+    margin: 5px auto; /* Reduce margin */
+  }
+
+  h2 {
+    font-size: 1.8rem; /* Further reduce heading size */
+  }
+
+  input[type="number"], select, button {
+    padding: 8px; /* Reduce padding for form elements */
+    font-size: 0.9rem; /* Reduce font size for form elements */
+  }
 }

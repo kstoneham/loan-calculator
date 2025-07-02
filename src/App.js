@@ -72,7 +72,7 @@ function App() {
   useEffect(() => {
     fetchBtcPrice();
     clearInterval(intervalId.current);
-    intervalId.current = setInterval(fetchBtcPrice, 60000);
+    intervalId.current = setInterval(fetchBtcPrice, 70000);
 
     return () => clearInterval(intervalId.current);
   }, []);
